@@ -16,12 +16,12 @@ fn display_help() {
     const ARGS: [&str; 1] =
         ["running todo-cli with args runs the args and immediately exits, e.g. 'todo-cli view'"];
     println!(
-        "{}",
+        "{}\n",
         ARGS.into_iter()
             .fold(String::from("args:"), |acc, s| acc + "\n  " + s)
     );
     println!(
-        "{}",
+        "{}\n",
         COMMANDS
             .into_iter()
             .fold(String::from("commands:"), |acc, s| acc + "\n  " + s)

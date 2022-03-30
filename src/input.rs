@@ -55,9 +55,9 @@ fn add_handle(split: Vec<&str>) -> Command {
     let msg = split
         .iter()
         .skip(2)
-        .fold(String::from(""), |acc, x| acc + " " + x)
-        .trim()
-        .to_string();
+        .map(|s| (*s).trim().to_string())
+        .collect::<Vec<String>>()
+        .join(" ");
 
     Command::Add { priority, msg }
 }
@@ -118,9 +118,13 @@ fn swap_handle(split: Vec<&str>) -> Command {
     }
 }
 
-pub fn input() -> Command {
+pub fn stdin_input() -> Command {
     let mut cmd = String::new();
     stdin().read_line(&mut cmd).unwrap();
+    parse_input(cmd)
+}
+
+pub fn parse_input(cmd: String) -> Command {
     let split: Vec<&str> = cmd.split(" ").map(|s| s.trim()).collect();
 
     match split.get(0).unwrap().to_lowercase().as_str() {
@@ -133,8 +137,8 @@ pub fn input() -> Command {
         "done" => done_handle(split),
         "redo" => redo_handle(split),
         "swap" | "mv" => swap_handle(split),
-        _ => Command::Error {
-            msg: "unrecognized command, try 'help'".to_string(),
+        other_cmd => Command::Error {
+            msg: format!("unrecognized command '{other_cmd}', try 'help'"),
         },
     }
 }

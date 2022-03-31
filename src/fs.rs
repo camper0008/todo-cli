@@ -19,7 +19,10 @@ pub fn create_todo_file_if_doesnt_exist(save_dir: &String) {
 fn todo_file_content(save_dir: &String) -> String {
     let path = todo_file_path(save_dir);
 
-    fs::read_to_string(path).expect("unable to read file")
+    fs::read_to_string(path)
+        .expect("unable to read file")
+        .trim()
+        .to_string()
 }
 
 fn decode_todo_string(todo_string: String) -> Todo {

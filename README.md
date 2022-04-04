@@ -1,19 +1,19 @@
 # todo-cli
 
-Interactive shell for managing todo-list.
+Interactive shell for managing a todo-list.
 
 Run command `help` to view commands.
 
 Running with args executes the command and immediately exits, e.g.
 
-```sh
-$ todo-cli view
+```
+$ todo-cli add 0 buy eggs
 ```
 
 Would be the same as
 
-```sh
+```
 $ todo-cli
-view
-exit
+-> add 0 buy eggs
+-> exit
 ```
